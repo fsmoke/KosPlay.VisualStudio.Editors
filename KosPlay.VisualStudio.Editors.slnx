@@ -1,0 +1,12 @@
+<Solution>
+  <Project Path="VisualStudio.Editors/KosPlay.VisualStudio.Editors.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="Integration/KosPlay.Integration.Core.csproj" />
+  <Project Path="Integration.Tool/KosPlay.Integration.Tool.csproj" />
+  <Project Path="InstallerCustomActions/KosPlay.Installer.CustomActions.csproj" />
+  <Project Path="Installer/KosPlay.VisualStudio.Editors.Setup.wixproj">
+    <Platform Project="x64" />
+    <Build />
+  </Project>
+</Solution>

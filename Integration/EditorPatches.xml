@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditorPatches>
+  <VCDir>
+    <LangDir>
+      <File Name="nmake.xml" Rule="ConfigurationNMake">
+        <Property Name="NMakeBuildCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+        <Property Name="NMakeReBuildCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+        <Property Name="NMakeCleanCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+      </File>
+	  <File Name="custom_build_step.xml" Rule="ConfigurationCustomBuildStep">
+        <Property Name="Command" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+      </File>
+	  <File Name="build_events.xml" Rule="ConfigurationBuildEvents">
+        <Property Name="PreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+		<Property Name="PreLinkCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+		<Property Name="PostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+      </File>
+	  <File Name="custom_build_tool.xml" Rule="ConfigurationCustomBuildTool">
+        <Property Name="Command" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+      </File>
+    </LangDir>
+  </VCDir>
+</EditorPatches>

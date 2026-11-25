@@ -1,0 +1,76 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Package Name="KosPlay Visual Studio Editors (VS 18)" Manufacturer="KosPlay"
+           Version="1.1.0" UpgradeCode="BF925329-3732-46BB-91B8-FEEA671D2118"
+           Scope="perMachine" Language="1033" InstallerVersion="500">
+    <MajorUpgrade Schedule="afterInstallInitialize"
+                  DowngradeErrorMessage="A newer version of KosPlay Visual Studio Editors is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+    <Icon Id="KosPlayLogo.ico" SourceFile="..\Assets\logo.ico" />
+    <Property Id="ARPPRODUCTICON" Value="KosPlayLogo.ico" />
+    <Property Id="VSINSTALLDIR" Secure="yes" />
+    <Property Id="SAVEDVSROOT" Secure="yes">
+      <RegistrySearch Id="PreviousVSRoot" Root="HKLM"
+                      Key="Software\KosPlay\VisualStudio.Editors\VS18" Name="VSRoot"
+                      Type="raw" Bitness="always64" />
+    </Property>
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="KosPlay.VisualStudio.Editors" />
+    </StandardDirectory>
+    <CustomAction Id="SetINSTALLFOLDER" Property="INSTALLFOLDER" Value="[VSINSTALLDIR]\Common7\IDE\Extensions\KosPlay\VisualStudio.Editors" />
+
+    <Feature Id="Editors" Title="KosPlay Visual Studio Editors" Level="1">
+      <ComponentGroupRef Id="ExtensionFiles" />
+      <ComponentRef Id="IntegrationRegistration" />
+    </Feature>
+    <Component Id="IntegrationRegistration" Directory="INSTALLFOLDER"
+               Guid="0B8E2949-E4D8-4195-957E-BFB6FB848AD9" Bitness="always64">
+      <RegistryKey Root="HKLM" Key="Software\KosPlay\VisualStudio.Editors\VS18">
+        <RegistryValue Name="VSRoot" Type="string" Value="[VSINSTALLDIR]" KeyPath="yes" />
+        <RegistryValue Name="Product" Type="string" Value="[ProductCode]" />
+      </RegistryKey>
+    </Component>
+
+    <Binary Id="KosPlayActions"
+            SourceFile="$(var.KosPlay.Installer.CustomActions.TargetDir)KosPlay.Installer.CustomActions.CA.dll" />
+    <CustomAction Id="KosPlaySelect" BinaryRef="KosPlayActions" DllEntry="SelectVisualStudio" />
+    <CustomAction Id="KosPlayWait" BinaryRef="KosPlayActions" DllEntry="WaitForVisualStudio" />
+    <CustomAction Id="KosPlayModify" BinaryRef="KosPlayActions" DllEntry="ModifyRules"
+                  Execute="deferred" Impersonate="no" />
+    <CustomAction Id="KosPlayRestore" BinaryRef="KosPlayActions" DllEntry="RestoreRules"
+                  Execute="deferred" Impersonate="no" />
+    <CustomAction Id="KosPlayRollbackRules" BinaryRef="KosPlayActions" DllEntry="RestoreRules"
+                  Execute="rollback" Impersonate="no" Return="ignore" />
+    <CustomAction Id="KosPlayRefresh" BinaryRef="KosPlayActions" DllEntry="RefreshVisualStudio"
+                  Execute="deferred" Impersonate="no" />
+    <CustomAction Id="KosPlayRollbackRefresh" BinaryRef="KosPlayActions" DllEntry="RefreshVisualStudio"
+                  Execute="rollback" Impersonate="no" Return="ignore" />
+
+    <InstallExecuteSequence>
+      <Custom Action="KosPlaySelect" Before="CostInitialize" />
+      <Custom Action="SetINSTALLFOLDER" Before="CostFinalize" />
+      <!-- Immediate wait precedes the transaction, upgrade removal and rollback registration. -->
+      <Custom Action="KosPlayWait" Before="InstallInitialize" />
+
+      <Custom Action="KosPlayRestore" Before="RemoveFiles" Condition='REMOVE~="ALL"' />
+      <Custom Action="KosPlayRollbackRefresh" Before="InstallFiles" Condition="NOT Installed" />
+      <Custom Action="KosPlayRollbackRules" After="InstallFiles" Condition="NOT Installed" />
+      <Custom Action="KosPlayModify" After="KosPlayRollbackRules" Condition='NOT REMOVE~="ALL"' />
+      <Custom Action="KosPlayRefresh" After="KosPlayModify" />
+    </InstallExecuteSequence>
+    <UI>
+      <ProgressText Action="KosPlayWait" Message="Waiting for Visual Studio to close..." />
+      <ProgressText Action="KosPlayModify" Message="Configuring KosPlay property editors..." />
+      <ProgressText Action="KosPlayRestore" Message="Restoring Visual Studio property editors..." />
+      <ProgressText Action="KosPlayRefresh" Message="Updating Visual Studio configuration..." />
+    </UI>
+    <ui:WixUI Id="WixUI_Minimal" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+  </Package>
+  <Fragment>
+    <ComponentGroup Id="ExtensionFiles" Directory="INSTALLFOLDER">
+      <Files Include="$(var.PayloadDirectory)\**" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>
