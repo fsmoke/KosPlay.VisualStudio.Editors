@@ -19,5 +19,47 @@
         <Property Name="Command" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
       </File>
     </LangDir>
+    <SubDir Path="Application Type\Linux\1.0">
+      <LangDir>
+        <File Name="linux_build_makefile.xml" Rule="LinuxLocalBuild">
+          <Property Name="BuildCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="ReBuildCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="CleanCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+        </File>
+        <File Name="remote_build_events.xml" Rule="ConfigurationBuildEvents">
+          <Property Name="PreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="PreLinkCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="PostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="RemotePreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+          <Property Name="RemotePreLinkCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+          <Property Name="RemotePostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+        </File>
+        <File Name="remote_build_events_makefile.xml" Rule="ConfigurationBuildEvents">
+          <Property Name="PreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="PostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="RemotePreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+          <Property Name="RemotePostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+        </File>
+        <File Name="remote_linux_build_makefile.xml" Rule="LinuxRemoteBuild">
+          <Property Name="RemoteBuildCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+          <Property Name="RemoteReBuildCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+          <Property Name="RemoteCleanCommandLine" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+        </File>
+        <File Name="wsl_build_events.xml" Rule="ConfigurationBuildEvents">
+          <Property Name="PreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="PreLinkCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="PostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="RemotePreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+          <Property Name="RemotePreLinkCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+          <Property Name="RemotePostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+        </File>
+        <File Name="wsl_build_events_makefile.xml" Rule="ConfigurationBuildEvents">
+          <Property Name="PreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="PostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="batch" />
+          <Property Name="RemotePreBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+          <Property Name="RemotePostBuildCommand" DefaultEditor="DefaultCommandPropertyEditor" Syntax="bash" />
+        </File>
+      </LangDir>
+    </SubDir>
   </VCDir>
 </EditorPatches>

@@ -1,7 +1,7 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
      xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
   <Package Name="KosPlay Visual Studio Editors (VS 18)" Manufacturer="KosPlay"
-           Version="1.1.0" UpgradeCode="BF925329-3732-46BB-91B8-FEEA671D2118"
+           Version="1.0.0" UpgradeCode="BF925329-3732-46BB-91B8-FEEA671D2118"
            Scope="perMachine" Language="1033" InstallerVersion="500">
     <MajorUpgrade Schedule="afterInstallInitialize"
                   DowngradeErrorMessage="A newer version of KosPlay Visual Studio Editors is already installed." />

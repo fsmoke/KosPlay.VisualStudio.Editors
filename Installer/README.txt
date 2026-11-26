@@ -38,7 +38,7 @@ If multiple matching instances exist, specify:
 MSI owns HKLM\Software\KosPlay\VisualStudio.Editors\VS18 values VSRoot and Product.
 The saved root is used for maintenance and removal. Switching instances requires
 uninstalling the previous integration first. The upgrade code is unchanged from
-the vdproj package; version 1.1.0 upgrades the earlier 1.0.0 package.
+the vdproj package. The MSI, VSIX and C# projects use product version 1.0.0.
 
 The immediate selection action resolves VS before directory costing.
 The immediate wait action runs before InstallInitialize and upgrade removal.
