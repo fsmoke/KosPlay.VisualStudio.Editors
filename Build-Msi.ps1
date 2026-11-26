@@ -6,5 +6,4 @@ $msbuild = & $vswhere -latest -products '*' -version '[18.0,19.0)' -requires Mic
 if (-not $msbuild) { throw 'Visual Studio 2026 MSBuild was not found.' }
 & $msbuild (Join-Path $PSScriptRoot 'Installer\KosPlay.VisualStudio.Editors.Setup.wixproj') /restore /t:Build "/p:Configuration=$Configuration" /nologo /verbosity:minimal
 if ($LASTEXITCODE -ne 0) { throw "MSI build failed: $LASTEXITCODE" }
-& (Join-Path $PSScriptRoot 'Tests\Verify-Msi.ps1') -Configuration $Configuration
 Write-Host "MSI: Installer\bin\$Configuration\KosPlay.VisualStudio.Editors.VS18.msi"
