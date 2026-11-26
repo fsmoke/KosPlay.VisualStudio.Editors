@@ -1,0 +1,34 @@
+name: Build MSI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Release build
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v7
+
+      - name: Build and verify packages
+        run: .\Build-Msi.ps1 -Configuration Release
+
+      - name: Upload MSI
+        uses: actions/upload-artifact@v7
+        with:
+          name: KosPlay-Editors-MSI
+          path: Installer/bin/Release/KosPlay.VisualStudio.Editors.VS18.msi
+          if-no-files-found: error
+          retention-days: 30
